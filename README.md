@@ -12,13 +12,15 @@ First publication requires enabling GitHub Pages with **GitHub Actions** and mer
 
 ![30-second bilingual walkthrough using fictional HAR data](docs/assets/demo.gif)
 
-Five real UI states, six seconds each. [Captions and demo notes / 字幕与演示说明](docs/DEMO.md). The workbench currently has a Chinese interface; English usage instructions and captions are provided.
+Five real UI states, six seconds each. [Captions and demo notes](docs/DEMO.md). The workbench currently has a Chinese interface; English usage instructions and captions are provided.
+
+The interface is currently Chinese. See the [UI label reference](docs/USAGE.md#interface-label-reference) when following the translated button names below.
 
 ## Try it in a minute
 
-1. Open the workbench and click **试用虚构示例** (Try synthetic demo).
+1. Open the workbench and click **Try synthetic demo**.
 2. See six fictional requests, three failed/no-response requests and two slow requests at the 2,000 ms threshold.
-3. Open **脱敏预览** (Sanitized preview), then download HAR or Markdown.
+3. Open **Sanitized preview**, then download HAR or Markdown.
 4. Inspect the output before sharing. Hostnames, arbitrary path text and request patterns can still reveal business information.
 
 You can also open `dist/har-workbench.html` locally. The sample uses only fictional `example.com` traffic. [Full usage guide](docs/USAGE.md).
@@ -59,13 +61,15 @@ On Windows PowerShell, use `npm.cmd`. Open the printed `http://127.0.0.1:4173`. 
 
 Edit `src/`, then regenerate tracked `dist/` with `npm run build`. Six CI jobs cover Ubuntu/Windows with Node 20/22/24 and verify generated artifacts. Browser checks remain necessary for UI changes. Use a feature branch and PR; see [contributing](CONTRIBUTING.md).
 
-## Launch material / 推广资料
+## Launch material
 
-- [Usage guide / 使用说明](docs/USAGE.md)
-- [30-second demo / 30 秒演示](docs/DEMO.md)
-- [Deployment / 部署说明](docs/DEPLOYMENT.md)
-- [English and Chinese post drafts / 中英文推广文案](docs/PROMOTION.md)
-- [Two-week validation plan / 两周验证计划](docs/EXPERIMENT.md)
+[All documentation](docs/README.md)
+
+- [Usage guide](docs/USAGE.md)
+- [30-second demo](docs/DEMO.md)
+- [Deployment](docs/DEPLOYMENT.md)
+- [Post drafts](docs/PROMOTION.md)
+- [Two-week validation plan](docs/EXPERIMENT.md)
 
 The promotion kit does not publish posts or collect usage telemetry.
 

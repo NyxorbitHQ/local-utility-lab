@@ -1,3 +1,7 @@
+# Pull request template
+
+[English](PULL_REQUEST_TEMPLATE.md) · [简体中文](PULL_REQUEST_TEMPLATE.zh-CN.md)
+
 ## Problem and behavior
 
 Describe the concrete trigger, previous behavior and resulting behavior.

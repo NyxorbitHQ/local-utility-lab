@@ -1,66 +1,49 @@
-# 验证记录
+# MVP validation record
 
-## English summary / 历史记录说明
+[English](VALIDATION.md) · [简体中文](VALIDATION.zh-CN.md)
 
-The record below describes the original v0.1.0 checks on 2026-10-20: 20 local tests, successful HTTP browser flows and synthetic-data exports. It is historical, not proof of current remote deployment or CI status. The original browser interface blocked file:// automation; that boundary was not bypassed. See LAUNCH-VALIDATION.md for launch-kit checks and their actual limits.
+This is the historical v0.1.0 validation record from 2026-10-20, not proof of current deployment or CI status. See [launch validation](LAUNCH-VALIDATION.md) for the launch-kit checks.
 
-下文是最初 v0.1.0 的历史验证，不代表当前远程部署或 CI 状态。推广准备的验证与限制另记于 LAUNCH-VALIDATION.md。
+## Local automated checks
 
-## 简体中文 / Original validation record
+Windows, Node.js 22.19.0: `npm.cmd run check` passed all 20 tests in the project directory and built the standalone page without third-party packages.
 
-日期：2026-10-20。版本：0.1.0。
+Coverage includes BOM and malformed JSON/HAR inputs, size/count limits, empty inputs; removal of credentials, bodies and metadata; repeated parameters, encoded paths, literal replacement words and common email/ID patterns; retained arbitrary path text, invalid URLs, numbers and times; immutable input, prototype-like keys, status/P95 calculation, Markdown escaping and report truncation; matching CSP hashes, reproducible output, no external script/style/API calls and no input assigned to `innerHTML`.
 
-## 本地自动检查
+An earlier build check found that `$&` in string replacement could alter embedded code and invalidate CSP hashes. Replacement callbacks fixed the issue and the regression passed.
 
-环境：Windows，Node.js v22.19.0。已在实际项目目录执行 `npm.cmd run check`：20 项测试全部通过，独立页面构建成功。无需安装第三方包。
+## Browser checks
 
-测试覆盖：
+The following checks used local HTTP preview in the Codex in-app browser.
 
-- BOM、错误 JSON、错误 HAR、大小和条数限制、空文件内容与空 HAR。
-- 凭据／正文／元数据移除、重复参数、编码路径、自定义字面替换、常见邮箱与 ID。
-- 未知路径文字仍保留的已知边界，无效 URL 替换，非数值与无效时间处理。
-- 原始对象不变、原型类键不复制、状态和 P95 计算、Markdown 标记转义、报告截断。
-- 独立构建、CSP 哈希匹配、无外部脚本／样式／调用接口、用户输入不写入 innerHTML、构建可重复。
-
-构建检查曾发现字符串替换中的 `$&` 会改变内嵌代码，导致 CSP 哈希不匹配；已改用替换回调并通过回归。
-
-## 浏览器实际验证
-
-通过本机 HTTP 预览，在 Codex 内置浏览器中完成：
-
-| 操作 | 结果 |
+| Action | Result |
 | --- | --- |
-| 点击虚构示例 | 6 条请求、3 条异常、2 条慢请求、P95 3,800 ms |
-| 真实文件选择器导入 examples/synthetic-demo.har | 成功读取并分析 |
-| 下载脱敏 HAR、Markdown、AI TXT | 三个文件实际落盘；读取校验条数与内容，未发现示例凭据残留 |
-| 脱敏预览与 AI 材料 | JSON 可解析；AI 材料区分事实与假设 |
-| 自定义替换词 shop | 原域名从预览消失，替换为 redacted.invalid |
-| 改变规则／阈值 | 旧导出隐藏，需重新生成；5,000 ms 阈值下慢请求为 0 |
-| 错误 JSON | 显示明确错误，不保留上一次结果 |
-| 取消「只看异常」 | 表格显示全部 6 条请求 |
-| 键盘右箭头切换页签 | aria-selected 正确切到脱敏预览 |
-| URL／正文带 img 与 script 标记 | 未生成图片节点，未出现脚本对话框 |
-| 使用说明与选题页面 | 导航和内容可见 |
-| 桌面 1440 × 1050 视口 | 已检查并保存截图 |
-| 手机 390 × 844 视口 | 文档 clientWidth 与 scrollWidth 均为 375；表格单独横向滚动 |
-| 控制台 | 已检查 warn／error，结果为空 |
-| HTTP 入口及源码路径 | 页面返回 200，README.md 路径返回 404 |
+| Load the synthetic demo | Six requests, three failed/no-response, two slow, P95 3,800 ms |
+| Import `examples/synthetic-demo.har` through the file chooser | Read and analyzed successfully |
+| Download sanitized HAR, Markdown and AI TXT | Three files saved; request counts and content checked; no sample credentials remained |
+| Inspect sanitized preview and AI material | Valid JSON; AI material separates facts from hypotheses |
+| Add literal replacement word `shop` | Original hostname disappeared, replaced by `redacted.invalid` |
+| Change rules or threshold | Old exports hidden until regeneration; no slow requests at 5,000 ms |
+| Enter malformed JSON | Clear error; prior results removed |
+| Disable the findings-only filter | All six requests shown |
+| Switch tabs with the right-arrow key | Correct `aria-selected` state on sanitized preview |
+| Include `img`/`script` markup in URLs or bodies | No image nodes or script dialogs appeared |
+| Open guide and research pages | Navigation and content visible |
+| Desktop viewport, 1440 × 1050 | Inspected and screenshot saved |
+| Mobile viewport, 390 × 844 | Document client/scroll width both 375; table scrolls independently |
+| Console | No warning/error entries |
+| HTTP entry and source paths | App returned 200; README path returned 404 |
 
-所有输入均为虚构数据。没有上传真实业务日志，也没有调用模型。
+All input was synthetic. No business logs were uploaded and no model was called.
 
-## 未验证与限制
+## Limits and unverified behavior
 
-- 独立 HTML 无外部资源／导入依赖，但**未实测双击文件运行**：浏览器自动化接口的安全策略禁止访问 file://，未尝试绕过。实际页面流程在本地 HTTP 预览中通过。
-- 未在其他浏览器与操作系统做完整兼容性验证；移动端只验证响应式视口，非实体手机。
-- 首次本地验证时尚未连接 GitHub remote 或运行远程 CI。当前交付状态请查看仓库的 PR 与 GitHub Actions；本段不作为远程 CI 结果。
-- 没有进行真实用户访谈、获客或付费验证。
-- 自动脱敏不能保证所有业务信息都被识别，分享仍需人工检查。
+- The standalone HTML has no external resources/imports, but double-click execution was not tested: browser automation blocked `file://` access and that restriction was not bypassed. App flows passed over local HTTP.
+- Other browsers/operating systems were not fully tested. Mobile checks used a responsive viewport, not a physical device.
+- The original local checks preceded GitHub remote setup and remote CI. Consult the PR and Actions for current delivery status.
+- No user interviews, acquisition or paid-demand validation were performed.
+- Automatic redaction can miss business details. Review exports before sharing.
 
-## 运行
+## Run locally
 
-```powershell
-Set-Location "$env:USERPROFILE\Documents\code\local-utility-lab"
-npm.cmd start
-```
-
-打开打印的本地地址。独立页面位于 dist/index.html，可由使用者自行双击验证；剪贴板受限时使用下载 TXT 或手动复制。
+Run `npm start` (`npm.cmd start` in PowerShell) and open the printed local URL. The original standalone page is `dist/index.html`. Users can verify direct file execution themselves. If clipboard access is blocked, download TXT or copy manually.
