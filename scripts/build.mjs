@@ -3,6 +3,7 @@ import { createHash } from 'node:crypto';
 import { fileURLToPath } from 'node:url';
 import path from 'node:path';
 import { DEMO_HAR } from '../src/demo.mjs';
+import { buildDemo } from './build-demo.mjs';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
 const read = async name => (await readFile(path.join(root, name), 'utf8')).replace(/\r\n/g, '\n');
@@ -20,6 +21,9 @@ const html = template.replace('<!-- CSP -->', `<meta http-equiv="Content-Securit
 await mkdir(path.join(root, 'dist'), { recursive: true });
 await mkdir(path.join(root, 'examples'), { recursive: true });
 await writeFile(path.join(root, 'dist/index.html'), html, 'utf8');
+// The downloadable copy works alone; its demo link intentionally opens the public site.
+await writeFile(path.join(root, 'dist/har-workbench.html'), html.replace('href="./demo/"', 'href="https://nyxorbithq.github.io/local-utility-lab/demo/"'), 'utf8');
 await writeFile(path.join(root, 'dist/.nojekyll'), '', 'utf8');
 await writeFile(path.join(root, 'examples/synthetic-demo.har'), `${JSON.stringify(DEMO_HAR, null, 2)}\n`, 'utf8');
+await buildDemo(root);
 console.log(`Built dist/index.html (${Buffer.byteLength(html).toLocaleString()} bytes). No external dependencies or network requests.`);

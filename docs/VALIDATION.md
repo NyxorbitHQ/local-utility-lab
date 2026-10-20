@@ -1,5 +1,13 @@
 # 验证记录
 
+## English summary / 历史记录说明
+
+The record below describes the original v0.1.0 checks on 2026-10-20: 20 local tests, successful HTTP browser flows and synthetic-data exports. It is historical, not proof of current remote deployment or CI status. The original browser interface blocked file:// automation; that boundary was not bypassed. See LAUNCH-VALIDATION.md for launch-kit checks and their actual limits.
+
+下文是最初 v0.1.0 的历史验证，不代表当前远程部署或 CI 状态。推广准备的验证与限制另记于 LAUNCH-VALIDATION.md。
+
+## 简体中文 / Original validation record
+
 日期：2026-10-20。版本：0.1.0。
 
 ## 本地自动检查

@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="description" content="在浏览器本地脱敏 HAR，整理失败请求、慢请求和可分享的故障线索报告。无需账号，不上传日志。">
   <meta name="color-scheme" content="light">
+  <meta name="referrer" content="no-referrer">
   <!-- CSP -->
   <title>HAR 工作台 · Local Utility Lab</title>
   <!-- STYLE -->
@@ -26,6 +27,7 @@
       <header class="topbar"><span>本地工具实验室 <span class="crumb">/</span> <span id="breadcrumb">HAR 工作台</span></span><span class="local-badge"><span class="status-dot"></span> LOCAL PROCESSING</span></header>
       <div class="main-content">
         <section id="workspace" data-page="workspace" aria-labelledby="hero-title">
+          <nav class="launch-links" aria-label="试用与反馈 / Try and feedback"><a href="./demo/">30 秒演示 / 30s demo ↗</a><a href="./har-workbench.html" download>下载单文件 / Download HTML ↓</a><a href="https://github.com/NyxorbitHQ/local-utility-lab/issues/new?template=feedback.yml" target="_blank" rel="noopener noreferrer">反馈 / Feedback ↗</a><a href="https://github.com/NyxorbitHQ/local-utility-lab" target="_blank" rel="noopener noreferrer">GitHub ↗</a></nav>
           <div class="hero"><div><div class="eyebrow">NETWORK EVIDENCE, MADE SHAREABLE</div><h1 id="hero-title">从网络日志，到<span>清晰的故障线索。</span></h1><p>脱敏 HAR，筛出异常与慢请求，整理成开发者能继续排查的报告。</p></div><div class="hero-tag"><span>HAR</span><span>→</span><span>REPORT</span><small>所有处理都在浏览器内完成</small></div></div>
           <div class="input-grid">
             <section class="card input-card" aria-labelledby="input-title">
@@ -51,7 +53,7 @@
           </section>
         </section>
         <section data-page="guide" id="guide" class="article-page" hidden><div class="eyebrow">A SMALL, HONEST TOOL</div><h1>从浏览器导出，<br>到清晰的排查材料。</h1><div class="article-grid"><article class="card"><h2>1. 获取 HAR</h2><p>在 Chrome 或 Edge 开发者工具中打开 Network，复现问题，然后导出 HAR。浏览器的默认脱敏可移除部分凭据，但不保证正文、参数与业务数据均已隐藏。</p><h2>2. 本地处理与预览</h2><p>导入文件，补充你知道的客户名、项目名等替换词，生成报告。先查看脱敏预览；规则变化后需要重新生成。</p><h2>3. 分享需要的材料</h2><p>脱敏 HAR 保留请求顺序、地址、状态与耗时。Markdown 汇总异常与慢请求，AI 分析材料额外附带区分事实和假设的提示词。</p></article><article class="card"><h2>明确的边界</h2><p>自动脱敏不等于彻底匿名化。域名、路径中的普通文字、请求时间和业务模式仍可能敏感。额外替换词采用区分大小写的字面匹配。</p><p>此工具不执行请求、不推断已移除的正文、不判断根因，也不保证修复问题。无响应可能是取消、网络失败或其他原因。</p><p>页面不保存历史、不使用 Cookie 或浏览器持久存储、不加载第三方字体与分析脚本。离开或清除后，内容不再由页面保存。</p><h2>文件限制</h2><p>最大 20 MiB、20,000 条请求；超过限制请先在浏览器筛选。支持有效的 HAR 1.2 JSON。文件正文始终移除。</p></article></div></section>
-        <section data-page="research" id="research" class="article-page" hidden><div class="eyebrow">BUILD → OBSERVE → DECIDE</div><h1>先验证使用价值，<br>再决定是否商业化。</h1><div class="article-grid"><article class="card"><h2>为什么做这个</h2><p>分享网络故障时，用户需要兼顾信息保护和可排查性。这个实验把本地脱敏、请求线索和报告整理放到一个页面。</p><p>Chrome 已有基础脱敏，Google 也有开源 HAR Sanitizer；我们验证的是工作流便利性，不声称市场空白或已有付费需求。</p><h2>如何验证</h2><ol><li>用虚构样本展示完整任务。</li><li>邀请目标用户尝试自己的获授权样本。</li><li>记录是否独立完成、是否复用，以及现有工具哪里更好。</li><li>有重复使用后，再验证批量处理、对比和模板是否值得付费。</li></ol></article><article class="card"><h2>资料与下一步</h2><p><a href="https://developer.chrome.com/docs/devtools/network/reference/" target="_blank" rel="noopener noreferrer">Chrome：Network 功能与 HAR 导出 ↗</a></p><p><a href="https://github.com/google/har-sanitizer" target="_blank" rel="noopener noreferrer">Google HAR Sanitizer ↗</a></p><p>这些资料证明同类工作流与竞品存在，不证明本项目能赚到钱。尚未进行用户访谈或真实付费测试。</p><h2>第二候选：字幕翻译回填</h2><p>将字幕文本按固定 ID 分批导出给 AI，回填时校验缺失与重复，保留原时间轴。目前只完成选题，未实现。</p><p class="muted">调研日期：2026-10-20。完整记录和验证计划见源码中的 docs/RESEARCH.md。</p></article></div></section>
+        <section data-page="research" id="research" class="article-page" hidden><div class="eyebrow">BUILD → OBSERVE → DECIDE</div><h1>先验证使用价值，<br>再决定是否商业化。</h1><div class="article-grid"><article class="card"><h2>为什么做这个</h2><p>分享网络故障时，用户需要兼顾信息保护和可排查性。这个实验把本地脱敏、请求线索和报告整理放到一个页面。</p><p>Chrome 已有基础脱敏，Google 也有开源 HAR Sanitizer；我们验证的是工作流便利性，不声称市场空白或已有付费需求。</p><h2>如何验证</h2><ol><li>用虚构样本展示完整任务。</li><li>邀请目标用户尝试自己的获授权样本。</li><li>记录是否独立完成、是否复用，以及现有工具哪里更好。</li><li>有重复使用后，再验证批量处理、对比和模板是否值得付费。</li></ol></article><article class="card"><h2>资料与下一步</h2><p><a href="https://developer.chrome.com/docs/devtools/network/reference/" target="_blank" rel="noopener noreferrer">Chrome：Network 功能与 HAR 导出 ↗</a></p><p><a href="https://github.com/google/har-sanitizer" target="_blank" rel="noopener noreferrer">Google HAR Sanitizer ↗</a></p><p>这些资料证明同类工作流与竞品存在，不证明本项目能赚到钱。尚未进行用户访谈或真实付费测试。</p><p class="muted">调研日期：2026-10-20。完整记录和验证计划见源码中的 docs/RESEARCH.md。</p></article></div></section>
         <footer>LOCAL UTILITY LAB <span>小工具，清晰的边界。由你掌握数据。</span></footer>
       </div>
     </main>
