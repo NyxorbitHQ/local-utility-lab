@@ -1,0 +1,15 @@
+{
+  "name": "local-utility-lab",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Local HAR redaction and evidence reports. No uploads or model calls.",
+  "type": "module",
+  "engines": { "node": ">=20" },
+  "scripts": {
+    "test": "node --test",
+    "build": "node scripts/build.mjs",
+    "start": "node scripts/serve.mjs",
+    "check": "npm run test && npm run build"
+  },
+  "license": "MIT"
+}
