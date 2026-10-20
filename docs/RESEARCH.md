@@ -1,10 +1,28 @@
-# 选题与资料记录
+# HAR research / HAR 调研记录
 
-日期：2026-10-20。目的：找到适合个人开发、可在公开渠道展示和自主试用的小工具。此文不代表已验证收入或付费意愿。
+## English summary
+
+Research date: 2026-10-20. The first experiment combines browser-local HAR redaction with request evidence reports. Chrome and Google's HAR Sanitizer already address sanitization; the hypothesis is convenience, not a new market or validated willingness to pay. Community anecdotes are problem clues, not representative demand statistics.
+
+No user interviews, retention measurements, price validation or sales have been completed. This document covers only the HAR workbench.
+
+| Source | Observation and limits |
+| --- | --- |
+| [Chrome Network reference](https://developer.chrome.com/docs/devtools/network/reference/) | HAR export and basic sanitization already exist. This does not demonstrate an unmet paid need. |
+| [Google HAR Sanitizer](https://github.com/google/har-sanitizer) | An existing open-source competitor. This project does not claim to invent HAR sanitization or copy its source. |
+| [HAR sharing discussion](https://www.reddit.com/r/webdev/comments/1qg37h3/do_you_scrub_har_files_before_sending_them_to/) | Anecdotes about credentials in HAR files are problem clues, not representative demand or willingness-to-pay evidence. |
+
+The MVP processes files in the browser, rebuilds an allowlist of fields, drops bodies and extension metadata, and exports readable evidence. Conservative redaction loses some debugging detail. AI-ready material can be copied to the user's own model; the app does not request API keys or make model calls. Static hosting avoids per-use model fees but development, maintenance, acquisition and support still cost time.
+
+Still unknown: repeat use versus existing alternatives, which users need reports or batch/comparison features, real download and retention counts, pricing, conversion, acquisition cost and revenue. Shipping software and finding competitors or anecdotes do not establish commercial validation.
+
+## 简体中文
+
+日期：2026-10-20。目的：研究 HAR 工作台的使用价值、现有方案与验证边界。此文不代表已验证收入或付费意愿。
 
 ## 结论
 
-先实现 HAR 本地脱敏与报告工具。第二候选是字幕翻译回填。暂缓通用 JSON 格式化／OpenAPI 对比：成熟开源工具已覆盖大量需求，当前没有证据支持一个通用替代品。
+本项目聚焦 HAR 本地脱敏与报告整理。
 
 HAR 方向仍有充分竞争。此次实现只验证「将安全分享与整理排查材料合成一个流程」是否比既有工作流更方便。
 
@@ -15,9 +33,6 @@ HAR 方向仍有充分竞争。此次实现只验证「将安全分享与整理�
 | [Chrome Network reference](https://developer.chrome.com/docs/devtools/network/reference/) | 官方产品文档 | 支持 HAR 导出；默认脱敏排除 Cookie、Set-Cookie、Authorization 等头 | 证明官方已有基础能力，不能据此声称存在付费缺口 |
 | [Google HAR Sanitizer](https://github.com/google/har-sanitizer) | 开源竞品 | 可选择头、参数和内容类型并导出脱敏 HAR | 证明竞品存在；本项目不复制其源码，也不声称首创 |
 | [HAR 分享前是否清理的讨论](https://www.reddit.com/r/webdev/comments/1qg37h3/do_you_scrub_har_files_before_sending_them_to/) | 社区自述，非代表性样本 | 有人担忧 HAR 中凭据并询问本地处理方案 | 只作问题线索，不作为市场规模或付费意愿证据 |
-| [oasdiff](https://github.com/oasdiff/oasdiff) | 开源竞品 | OpenAPI 变更与兼容性分析已有成熟实现 | 不优先做通用 OpenAPI 对比器 |
-| [Subtitle Edit](https://github.com/SubtitleEdit/subtitleedit) | 开源竞品 | 完整字幕编辑生态 | 不做全功能编辑器，字幕工具仅验证固定 ID 翻译回填流程 |
-| [字幕翻译保留时间轴讨论](https://www.reddit.com/r/SubtitleEdit/comments/1sw9oeb/translating_an_srt_files_whilst_maintaining_the/) | 社区自述，非代表性样本 | 有人关心翻译时保留时间轴；回复提到既有解决方式 | 需求不是未被解决，便利性差异仍需验证 |
 
 ## HAR MVP 的取舍
 

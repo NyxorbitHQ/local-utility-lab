@@ -1,5 +1,23 @@
 # 首轮验证计划
 
+## English / Two-week launch experiment
+
+This is a plan, not collected evidence. Days 1–2: verify online app, demo, README and download. Days 3–5: the owner may publish one technical article and one maker post after reviewing community rules. Days 6–10: answer voluntary feedback and fix task blockers. Days 11–14: ask consenting participants whether they reused the tool.
+
+Internal targets, not forecasts: 20 target users try it, 5 complete an authorized task, 3 report reuse. Record only non-sensitive aggregate counts and voluntary answers. Repository visits/stars do not establish actual use. No telemetry or automated outreach is added.
+
+Ask: What task did you try? Did you finish? Where did you get stuck? What did you use before? Would you use it again? Do not collect files, credentials or private URLs. Only investigate paid features after repeat use demonstrates value; a compliment is not a purchase.
+
+## 简体中文 / 两周推广实验
+
+以下为计划，不是已收集的数据。第 1—2 天核对线上应用、演示、README 和下载；第 3—5 天由拥有者检查规则后发布一篇技术文章和一篇作品帖；第 6—10 天回应自愿反馈、修复任务障碍；第 11—14 天向同意参与的人了解是否复用。
+
+内部目标（非预测）：20 人试用、5 人完成获授权任务、3 人报告复用。只记录不敏感的汇总与自愿回答；仓库访问和 Star 不是实际使用。不加埋点，不自动私信或发帖。
+
+问题：想完成什么、是否完成、卡在哪里、原来怎么做、是否再次使用？不收集文件、凭据或内部地址。重复使用证明价值后再探索付费，口头赞同不算购买。
+
+## Further staged validation / 后续分阶段验证
+
 状态：计划，尚未执行。没有用户访谈、真实使用统计或销售数据。不自动向任何人发送消息或发帖。
 
 ## 第一轮：任务能否完成

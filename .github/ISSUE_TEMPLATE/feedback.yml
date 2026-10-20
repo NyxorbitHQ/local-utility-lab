@@ -1,0 +1,44 @@
+name: Usage feedback / 使用反馈
+description: Tell us whether the tool helped. Do not attach real HARs. / 反馈实际使用体验，请勿上传真实 HAR。
+title: "[Feedback] "
+body:
+  - type: markdown
+    attributes:
+      value: "Use synthetic examples only. Do not paste credentials, internal URLs, real logs or customer data. / 仅使用虚构示例，勿粘贴凭据、内部地址、真实日志或客户信息。"
+  - type: dropdown
+    id: role
+    attributes:
+      label: Your workflow / 使用场景
+      options:
+        - QA or testing / 测试
+        - Frontend or backend / 前后端开发
+        - Technical support / 技术支持
+        - Other / 其他
+    validations:
+      required: true
+  - type: textarea
+    id: task
+    attributes:
+      label: Task and outcome / 任务和结果
+      description: What were you trying to do? Did you finish? / 想完成什么？是否完成？
+    validations:
+      required: true
+  - type: textarea
+    id: friction
+    attributes:
+      label: Missing or confusing / 缺失或困惑之处
+      description: Describe the issue without private input. / 请描述问题，不要提供私密输入。
+  - type: dropdown
+    id: reuse
+    attributes:
+      label: Would you use it again? / 是否会再次使用？
+      options:
+        - Already used it again / 已重复使用
+        - Likely / 可能会
+        - Unlikely / 不太会
+        - Not sure / 不确定
+  - type: textarea
+    id: alternative
+    attributes:
+      label: Previous workflow / 原来的处理方式
+      description: What did you use before, and what worked better? / 原来用什么？哪种方式更好？

@@ -13,6 +13,7 @@ test('build creates an offline standalone page with matching CSP hashes', async 
   try {
     await cp(path.join(root, 'src'), path.join(temp, 'src'), { recursive: true });
     await cp(path.join(root, 'scripts'), path.join(temp, 'scripts'), { recursive: true });
+    await cp(path.join(root, 'docs/assets'), path.join(temp, 'docs/assets'), { recursive: true });
     await cp(path.join(root, 'package.json'), path.join(temp, 'package.json'));
     const build = spawnSync(process.execPath, ['scripts/build.mjs'], { cwd: temp, encoding: 'utf8' });
     assert.equal(build.status, 0, build.stderr);
@@ -27,6 +28,19 @@ test('build creates an offline standalone page with matching CSP hashes', async 
     assert.ok(!/<script[^>]+src=/i.test(html)); assert.ok(!/<link[^>]+href=/i.test(html));
     assert.ok(!/localStorage|sessionStorage|indexedDB|fetch\(|XMLHttpRequest|sendBeacon|WebSocket/.test(script));
     assert.ok(!/\.innerHTML\s*=|insertAdjacentHTML/.test(script));
+    const standalone = await readFile(path.join(temp, 'dist/har-workbench.html'), 'utf8');
+    assert.ok(standalone.includes('href="https://nyxorbithq.github.io/local-utility-lab/demo/"'));
+    const tour = await readFile(path.join(temp, 'dist/demo/index.html'), 'utf8');
+    const tourScript = tour.match(/<script>([\s\S]*?)<\/script>/)[1];
+    const tourStyle = tour.match(/<style>([\s\S]*?)<\/style>/)[1];
+    assert.ok(tour.includes(`script-src 'sha256-${hash(tourScript)}'`));
+    assert.ok(tour.includes(`style-src 'sha256-${hash(tourStyle)}'`));
+    assert.ok(tour.includes("connect-src 'none'"));
+    assert.ok(tour.includes('暂停')); assert.ok(tour.includes('Pause'));
+    assert.ok(tour.includes('6000')); assert.ok(!tour.includes('autoplay'));
+    for (let i = 1; i <= 5; i++) {
+      assert.deepEqual(await readFile(path.join(temp, `dist/media/step-${i}.jpg`)), await readFile(path.join(root, `docs/assets/step-${i}.jpg`)));
+    }
     const syntax = spawnSync(process.execPath, ['--input-type=module', '--check'], { input: script, encoding: 'utf8' });
     assert.equal(syntax.status, 0, syntax.stderr);
     const first = html;

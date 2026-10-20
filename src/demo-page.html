@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="A 30-second bilingual walkthrough of local HAR redaction, request evidence, and report exports. 30 秒双语演示：本地 HAR 脱敏与报告导出。">
+<meta name="referrer" content="no-referrer">
+<!-- CSP -->
+<title>30s walkthrough / 30 秒演示 · Local Utility Lab</title>
+<style>
+:root{font-family:'Segoe UI','Microsoft YaHei',sans-serif;color:#15333c;background:#f4f7f5}*{box-sizing:border-box}body{margin:0}main{max-width:1060px;margin:auto;padding:32px 22px}a{color:#17634f}header{display:flex;justify-content:space-between;gap:18px;align-items:center;font-size:12px}header nav{display:flex;gap:18px;flex-wrap:wrap}.eyebrow{font:10px Consolas,monospace;letter-spacing:1.5px;color:#507e66;margin-top:45px}h1{font-size:30px;line-height:1.5;margin:14px 0 10px}h1 span{font-size:22px;color:#4e7160}.intro{font-size:13px;line-height:1.8;color:#708278;margin-bottom:25px}.stage{background:white;border:1px solid #dce6df;border-radius:10px;overflow:hidden}.frame{background:#e7eeea;aspect-ratio:16/10;display:flex;align-items:center;justify-content:center;padding:10px}img{display:block;max-width:100%;max-height:100%;object-fit:contain}.caption{padding:20px 24px;min-height:112px;border-top:1px solid #e4ebe6}#en{font-size:16px;font-weight:600;margin:0 0 8px}#zh{font-size:13px;color:#63816e;margin:0;line-height:1.8}.controls{padding:15px 24px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;border-top:1px solid #e4ebe6}button{border:1px solid #cdded1;border-radius:5px;background:white;color:#195440;font-family:inherit;font-size:12px;padding:9px 12px;cursor:pointer}button.primary{background:#17634f;color:white;border-color:#17634f}button:disabled{opacity:.4;cursor:not-allowed}:focus-visible{outline:3px solid #c79140;outline-offset:3px}#progress{margin-left:auto;font:11px Consolas,monospace;color:#748b7c}.notes{font-size:12px;line-height:1.9;color:#738277;margin:20px 0}footer{font-size:11px;padding:20px 0;border-top:1px solid #dce6df;color:#738277}.links{display:flex;gap:20px;margin:24px 0;font-size:13px}@media(max-width:600px){main{padding:20px 15px}header{align-items:flex-start}header nav{gap:8px}h1{font-size:24px}h1 span{font-size:18px}.eyebrow{margin-top:30px}.caption{padding:17px;min-height:140px}.controls{padding:13px;gap:7px}.controls button{font-size:10px;padding:9px}#en{font-size:14px}.frame{aspect-ratio:4/3}.links{flex-wrap:wrap;gap:14px}#progress{font-size:10px}}@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<main>
+<header><strong>LOCAL UTILITY LAB</strong><nav aria-label="Navigation"><a href="../">Try the tool / 试用工具</a><a href="https://github.com/NyxorbitHQ/local-utility-lab" target="_blank" rel="noopener noreferrer">GitHub ↗</a></nav></header>
+<div class="eyebrow">FIVE STEPS · SYNTHETIC DATA ONLY</div>
+<h1>From a HAR to a shareable evidence brief.<br><span lang="zh-CN">从 HAR 到可以分享的故障线索。</span></h1>
+<p class="intro">A 30-second screenshot walkthrough. Press play, or move through the five real UI states at your own pace.<br><span lang="zh-CN">30 秒截图演示。点击播放，或逐步查看五个真实页面状态；不会读取你的文件或自动下载。</span></p>
+<section class="stage" aria-label="Walkthrough / 演示">
+<div class="frame"><img id="shot" src="../media/step-1.jpg" alt="Step 1: Import area and built-in synthetic demo / 第一步：导入区域与虚构示例"></div>
+<div class="caption" aria-live="polite"><p id="en">1. Start with the built-in synthetic HAR. No account needed.</p><p id="zh" lang="zh-CN">1. 使用内置虚构 HAR 体验，不需要账号或真实日志。</p></div>
+<div class="controls"><button class="primary" id="play">Play 30s / 播放</button><button id="previous" disabled>Previous / 上一步</button><button id="next">Next / 下一步</button><button id="restart">Restart / 重来</button><span id="progress">1 / 5 · 00 / 30s</span></div>
+</section>
+<div class="links"><a href="../">Open workbench / 打开工作台 →</a><a href="../har-workbench.html" download>Download offline HTML / 下载单文件 ↓</a><a href="https://github.com/NyxorbitHQ/local-utility-lab/issues/new?template=feedback.yml" target="_blank" rel="noopener noreferrer">Give feedback / 提供反馈 ↗</a></div>
+<p class="notes">Only fictional example.com requests appear here. The workbench processes HARs locally and makes no model calls. Automatic redaction can miss business details; review exports before sharing.<br><span lang="zh-CN">所有截图仅含虚构 example.com 请求。工作台在浏览器本地处理，不调用模型。自动脱敏可能遗漏业务信息，分享前仍需检查。</span></p>
+<footer>English captions explain the current Chinese interface. / 英文字幕解释当前中文界面。<br>This is a screenshot walkthrough, not a recording of live customer traffic. / 这是截图演示，不是真实客户流量录屏。</footer>
+</main>
+<script>
+const steps = [
+  ['Start with the built-in synthetic HAR. No account needed.', '使用内置虚构 HAR 体验，不需要账号或真实日志。'],
+  ['Review failed and slow requests, then inspect the status and timing.', '查看异常和慢请求，核对状态与耗时。'],
+  ['Preview the sanitized HAR. Bodies, credentials and query values are removed.', '预览脱敏 HAR；正文、凭据和查询参数值均已移除。'],
+  ['Review the AI-ready evidence brief. Nothing is sent to a model.', '检查供 AI 分析的材料；页面不会向模型发送内容。'],
+  ['Export HAR or Markdown, then inspect business details before sharing.', '导出 HAR 或 Markdown，人工检查业务信息后再分享。']
+];
+const find = id => document.getElementById(id);
+let index = 0;
+let timer = null;
+function pause() { clearInterval(timer); timer = null; find('play').textContent = 'Play 30s / 播放'; }
+function render() {
+  find('shot').src = `../media/step-${index + 1}.jpg`;
+  find('shot').alt = `Step ${index + 1}: ${steps[index][0]} / ${steps[index][1]}`;
+  find('en').textContent = `${index + 1}. ${steps[index][0]}`;
+  find('zh').textContent = `${index + 1}. ${steps[index][1]}`;
+  find('previous').disabled = index === 0;
+  find('next').disabled = index === steps.length - 1;
+  find('progress').textContent = `${index + 1} / 5 · ${String(index * 6).padStart(2, '0')} / 30s`;
+}
+find('play').addEventListener('click', () => {
+  if (timer) { pause(); return; }
+  if (index === steps.length - 1) { index = 0; render(); }
+  find('play').textContent = 'Pause / 暂停';
+  timer = setInterval(() => {
+    if (index === steps.length - 1) { pause(); find('progress').textContent = '5 / 5 · 30 / 30s'; return; }
+    index++; render();
+  }, 6000);
+});
+find('previous').addEventListener('click', () => { pause(); index = Math.max(0, index - 1); render(); });
+find('next').addEventListener('click', () => { pause(); index = Math.min(steps.length - 1, index + 1); render(); });
+find('restart').addEventListener('click', () => { pause(); index = 0; render(); });
+document.addEventListener('visibilitychange', () => { if (document.hidden) pause(); });
+</script>
+</body>
+</html>

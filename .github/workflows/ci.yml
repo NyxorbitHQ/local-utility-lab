@@ -29,4 +29,4 @@ jobs:
       - name: Build standalone page
         run: npm run build
       - name: Verify committed artifacts match source
-        run: git diff --exit-code -- dist/index.html examples/synthetic-demo.har
+        run: git diff --exit-code -- dist examples/synthetic-demo.har
